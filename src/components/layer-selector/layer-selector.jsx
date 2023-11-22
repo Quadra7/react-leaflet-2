@@ -6,15 +6,16 @@ export default function LayerSelector(props) {
 
     return (
         <>
-            <LayersControl.BaseLayer name='OTM' checked>
-                <TileLayer url={list['otm']}/>
-            </LayersControl.BaseLayer>
-            <LayersControl.BaseLayer name='CYCLE'>
-                <TileLayer url={list['cycle']}/>
-            </LayersControl.BaseLayer>
-            <LayersControl.BaseLayer name='TILEGEN'>
-                <TileLayer url={list['tilegen']}/>
-            </LayersControl.BaseLayer>
+            {
+                Object.keys(list).map((key, index) => {
+                    const isChecked = index === 0 ? true : false;
+                    return (
+                        <LayersControl.BaseLayer key={key} name={key.toUpperCase()} checked={isChecked}>
+                            <TileLayer url={list[key]} />
+                        </LayersControl.BaseLayer>
+                    );
+                })
+            }
         </>
     );
 }
